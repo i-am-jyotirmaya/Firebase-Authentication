@@ -1,0 +1,45 @@
+.component-section {
+    width: 55vw;
+    min-width: 450px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin: .8rem .5rem;
+    label {
+        font-size: .75rem;
+    }
+    .field {
+        width: 100%;
+        border: 2px solid;
+        padding: .5rem 1.5rem;
+        outline: 2px solid black;
+        outline-offset: -2px;
+        transition: outline-offset 250ms ease;
+        &:focus {
+            outline-offset: -6px;
+        }
+    }
+    .field-error {
+        color: tomato;
+        font-size: .8rem;
+    }
+}
+
+button.btn {
+    appearance: none;
+    background: none;
+    padding: .5rem 1.5rem;
+    border: 2px solid black;
+    outline: 2px solid black;
+    outline-offset: -2px;
+    transition: outline-offset 250ms ease;
+
+    &:hover, &:focus {
+        outline-offset: 2px;
+        &:active {
+            outline-offset: -6px;
+        }
+    }
+}

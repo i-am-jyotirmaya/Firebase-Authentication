@@ -1,0 +1,32 @@
+@import '../../../styles/base';
+
+label, button, .base-message {
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+h2 {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+hr {
+    border-color: black;
+}
+
+.form-group {
+    .field-error {
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+    &:last-of-type {
+        margin-top: 2rem;
+        display: grid;
+        place-content: center;
+    }
+}
+
+.base-message {
+    text-align: center;
+    font-size: .7rem;
+}
