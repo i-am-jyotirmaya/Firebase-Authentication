@@ -1,11 +1,8 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import env from 'react-dotenv';
 
 import './App.scss';
 import Firebase, { checkAuth } from './app/firebase';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
 import Login from './features/auth/login/Login';
 import Signup from './features/auth/signup/Signup';
 import Dashboard from './features/dash/Dashboard';
@@ -38,6 +35,7 @@ function App() {
 
 
   Firebase.auth().onAuthStateChanged((user) => {
+    console.warn(user);
     if(user) {
       loginUser(user);
     } else {

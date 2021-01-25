@@ -1,30 +1,24 @@
-import { CircularProgress, Container, Grid } from '@material-ui/core';
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { selectAuthStatus } from '../auth/authSlice';
+import { useDispatch } from 'react-redux';
+import useInitialAuthCheck from '../../custom-hooks/useInitialAuthCheck';
+import { logoutUser } from '../auth/authSlice';
+import Firebase from '../../app/firebase';
+
 import './Dashboard.scss'
 
 const Dashboard = (props) => {
-    const authStatus = useSelector(selectAuthStatus);
 
-    console.log(authStatus);
+    const dispatch = useDispatch();
 
-    if(authStatus.authStatus === 0) {
-        return <Redirect to="/login"/>
-    } else if (authStatus.authStatus === -1) {
-        return (<div style={{
-            height: '100vh',
-            display: 'grid',
-            placeContent: 'center'
-        }}>
-            <CircularProgress />
-        </div>)
-    }
-
+    const component = useInitialAuthCheck({authStatusCode: 0, redirectPath: '/login'});
+    if(component) return component;
+    console.log(Firebase.auth().currentUser);
     return (
         <React.Fragment>
-            Dashboard
+            Dashboard ({Firebase.auth().currentUser.displayName})
+            <button onClick={() => {
+                dispatch(logoutUser());
+            }}>Logout</button>
         </React.Fragment>
     );
 }

@@ -4,6 +4,7 @@ import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 import { createUser } from '../../../app/firebase';
+import useInitialAuthCheck from '../../../custom-hooks/useInitialAuthCheck';
 
 import './Signup.scss'
 
@@ -16,6 +17,10 @@ const validationSchema = Yup.object().shape({
 
 const Signup = (props) => {
     const history = useHistory();
+
+    const component = useInitialAuthCheck({authStatusCode: 1, redirectPath: '/'});
+    if(component) return component;
+
     return (
         <React.Fragment>
             <section className="component-section">
@@ -23,12 +28,11 @@ const Signup = (props) => {
                 <hr/>
                 <Formik
                     initialValues={{
-                        name: '',
+                        // name: '',
                         email: '',
                         password: '',
                         confirmPassword: ''
                     }}
-                    isInitialValid={false}
                     validationSchema={validationSchema}
                     validate={(values) => {
                         const errors = {};
@@ -39,18 +43,18 @@ const Signup = (props) => {
                     }}
                     
                     onSubmit={(values, actions) => {
-                        createUser(values.name, values.email, values.password, () => {
+                        createUser(values.email, values.password, () => {
                             history.push('/');
                         });
                     }}
                 >
                     {({errors, touched, isSubmitting}) => (
                         <Form>
-                            <div className="form-group">
+                            {/* <div className="form-group">
                                 <label htmlFor="signup-name">Name</label>
                                 <Field id="signup-name" name="name" type="text" className="field"/>
                                 {touched.name && errors.name && <div className="field-error">{errors.name}</div>}
-                            </div>
+                            </div> */}
                             <div className="form-group">
                                 <label htmlFor="signup-email">Email</label>
                                 <Field id="signup-email" name="email" type="text" className="field"/>

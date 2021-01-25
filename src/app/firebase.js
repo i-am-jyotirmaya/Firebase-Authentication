@@ -18,15 +18,15 @@ export default Firebase;
 // console.log(firebase.database.name);
 const Ui = new firebaseui.auth.AuthUI(Firebase.auth());
 
-const createUser = (name, email, password, onSuccess = undefined, onFail = undefined) => {
+const createUser = (email, password, onSuccess = undefined, onFail = undefined) => {
     Firebase.auth().createUserWithEmailAndPassword(email, password).then((value) => {
-        console.log(value);
+        console.log(Firebase.auth().currentUser);
         // addUserRecord(name, value.user.email);
-        Firebase.auth().currentUser.updateProfile({
-            displayName: name,
-        }).then(() => {
-            console.log('Name Added');
-        })
+        // Firebase.auth().currentUser.updateProfile({
+        //     displayName: name,
+        // }).then(() => {
+        //     console.log('Name Added');
+        // })
         onSuccess();
     }, (reason) => {
         console.log(reason);
@@ -42,7 +42,8 @@ const addUserRecord = (name, email) => {
     console.log('Adding User Record');
     let user = createUserObject(name, email);
     console.log(user);
-    Firebase.database().ref('users').push().set(user, (res) => {
+    let newRef = Firebase.database().ref('users').push();
+    newRef.set(user, (res) => {
         console.log(res);
     }).then((value) => {
         console.log(value);
@@ -59,7 +60,8 @@ const loginUser = (email, password, onSuccess = undefined, onFail = undefined) =
     })
 }
 
-const logoutUser = () => {
+const endSession = () => {
+    console.log('Signing out');
     Firebase.auth().signOut();
 }
 
@@ -67,7 +69,7 @@ const checkAuth = () => {
     return Firebase.auth().currentUser;
 }
 
-export {createUser, addUserRecord, Ui, loginUser, checkAuth};
+export {createUser, addUserRecord, Ui, loginUser, checkAuth, endSession};
 // const updateUserRecord = (userId, name, isAdmin) => {
 //     let updates = {}
 //     updates['/users/'+userId+'/name'] = name; 

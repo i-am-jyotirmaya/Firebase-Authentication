@@ -1,34 +1,60 @@
 import { Field, Form, Formik } from 'formik';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import * as Yup from 'yup';
 import firebase from 'firebase';
 
 import './Login.scss';
 import {addUserRecord, Ui, loginUser} from '../../../app/firebase';
-import { Link, Redirect, useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { CircularProgress } from '@material-ui/core';
+import useInitialAuthCheck from '../../../custom-hooks/useInitialAuthCheck';
 
 const Login = (props) => {
     const history = useHistory();
-    
-    useEffect(() => {
-        Ui.start('#firebaseui', {
-            signInOptions: [
-                firebase.auth.GoogleAuthProvider.PROVIDER_ID
-            ],
-            signInFlow: 'popup',
-            signInSuccessUrl: '/',
-            callbacks: {
-                signInSuccessWithAuthResult: (result) => {
-                    console.log(result);
-                    if(result.additionalUserInfo.isNewUser) {
-                        addUserRecord(result.additionalUserInfo.profile.name, result.additionalUserInfo.profile.email);
-                    }
-                    return true;
-                }
+
+    // useEffect(() => {
+    //     Ui.start('#firebaseui', {
+    //         signInOptions: [
+    //             firebase.auth.GoogleAuthProvider.PROVIDER_ID
+    //         ],
+    //         signInFlow: 'popup',
+    //         signInSuccessUrl: '/',
+    //         callbacks: {
+    //             signInSuccessWithAuthResult: (result) => {
+    //                 console.log(result);
+    //                 if(result.additionalUserInfo.isNewUser) {
+    //                     addUserRecord(result.additionalUserInfo.profile.name, result.additionalUserInfo.profile.email);
+    //                 }
+    //                 return true;
+    //             }
+    //         }
+    //     })
+    // })
+
+    let res = useInitialAuthCheck({authStatusCode: 1, redirectPath: '/'});
+    console.log(res);
+    Ui.reset();
+    if(res) {
+        return res;
+    }
+
+    Ui.start('#firebaseui', {
+        signInOptions: [
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID
+        ],
+        signInFlow: 'popup',
+        signInSuccessUrl: '/',
+        callbacks: {
+            signInSuccessWithAuthResult: (result) => {
+                console.log(result);
+                // if(result.additionalUserInfo.isNewUser) {
+                //     addUserRecord(result.additionalUserInfo.profile.name, result.additionalUserInfo.profile.email);
+                // }
+                return true;
             }
-        })
+        }
     })
+    
     return (
         <React.Fragment>
             <section className="component-section">
