@@ -70,11 +70,10 @@ const Signup = (props) => {
                                 <Field id="signup-c-password" name="confirmPassword" type="password" className="field"/>
                                 {touched.confirmPassword && errors.confirmPassword && <div className="field-error">{errors.confirmPassword}</div>}
                             </div>
-                            <div className="form-group">
+                            <div className="form-group btn">
                                 {!isSubmitting ?
                                 <button type="submit" className="control btn">Signup</button> :
                                 <CircularProgress/>}
-                                {/* <CircularProgress /> */}
                             </div>
                             <p className="base-message">Already a member? <Link to="/login">Login</Link></p>
                         </Form>

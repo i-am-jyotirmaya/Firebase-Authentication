@@ -20,6 +20,9 @@
         &:focus {
             outline-offset: -6px;
         }
+        &.select {
+            background-color: transparent;
+        }
     }
     .field-error {
         color: tomato;

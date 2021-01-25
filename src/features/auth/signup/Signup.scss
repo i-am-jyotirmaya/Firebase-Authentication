@@ -19,6 +19,9 @@ hr {
         font-weight: 600;
         text-transform: uppercase;
     }
+}
+
+.form-group.btn {
     &:last-of-type {
         margin-top: 2rem;
         display: grid;

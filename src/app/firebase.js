@@ -37,18 +37,24 @@ const createUser = (email, password, onSuccess = undefined, onFail = undefined) 
     
 }
 
-const addUserRecord = (name, email) => {
+const addUserRecord = (uid, name, email) => {
     console.log(Firebase.database.name);
     console.log('Adding User Record');
     let user = createUserObject(name, email);
     console.log(user);
-    let newRef = Firebase.database().ref('users').push();
+    let newRef = Firebase.database().ref('users').child(uid);
     newRef.set(user, (res) => {
         console.log(res);
     }).then((value) => {
         console.log(value);
     });
 }
+
+// const removeUserRecord = (uid) => {
+//     Firebase.database().ref('users').child(uid).remove((err) => {
+//         if(err) console.log(err);
+//     });
+// }
 
 const loginUser = (email, password, onSuccess = undefined, onFail = undefined) => {
     Firebase.auth().signInWithEmailAndPassword(email, password).then((value) => {

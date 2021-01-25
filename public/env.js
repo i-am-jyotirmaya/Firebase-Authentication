@@ -158,7 +158,7 @@ window.env = {
   "GNOME_TERMINAL_SERVICE": ":1.148",
   "TERM_PROGRAM": "vscode",
   "VSCODE_GIT_IPC_HANDLE": "/run/user/1000/vscode-git-91f7fe8ce5.sock",
-  "npm_package_gitHead": "1662b9af4f08f4634d648c39b8371346622ad577",
+  "npm_package_gitHead": "e828fcfec65df188b3f29f1da8e31c84733c84f6",
   "npm_config_fund": "true",
   "npm_config_fetch_retry_maxtimeout": "60000",
   "npm_config_loglevel": "notice",

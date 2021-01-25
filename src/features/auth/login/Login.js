@@ -87,7 +87,7 @@ const Login = (props) => {
                                 <Field id="login-password" name="password" type="password" className="field"/>
                                 {touched.password && errors.password && <div className="field-error">{errors.password}</div>}
                             </div>
-                            <div className="form-group">
+                            <div className="form-group btn">
                                 {!isSubmitting ?
                                     <button type="submit" className="control btn">Login</button> :
                                     <CircularProgress />

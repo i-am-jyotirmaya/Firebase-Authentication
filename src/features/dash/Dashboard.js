@@ -5,6 +5,7 @@ import { logoutUser } from '../auth/authSlice';
 import Firebase from '../../app/firebase';
 
 import './Dashboard.scss'
+import Profile from './profile/Profile';
 
 const Dashboard = (props) => {
 
@@ -19,6 +20,7 @@ const Dashboard = (props) => {
             <button onClick={() => {
                 dispatch(logoutUser());
             }}>Logout</button>
+            <Profile />
         </React.Fragment>
     );
 }
