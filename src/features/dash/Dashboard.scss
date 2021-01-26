@@ -1,0 +1,22 @@
+@import '../../styles/base';
+
+.dashboard-nav {
+    display: flex;
+    padding: .7rem 1rem;
+    justify-content: space-between;
+
+    &__heading {
+        font-size: 1.5em;
+        font-weight: 500;
+        line-height: 2.5em;
+    }
+
+    &__user {
+        font-size: 1.2em;
+        line-height: 3em;
+    }
+
+    .form-group.btn {
+        margin: .8rem .5rem;
+    }
+}
